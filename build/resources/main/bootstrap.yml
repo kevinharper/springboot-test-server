@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: springboot-test-server
+  mail:
+    host: "email-smtp.us-east-1.amazonaws.com"
+    port: 587
+    username: ""
+    password: ""
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+server:
+  contextPath: /springboot-test-server
+  port: 8080

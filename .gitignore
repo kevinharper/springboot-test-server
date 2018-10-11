@@ -1,0 +1,19 @@
+# Compiled class file
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+# IDE related files and folders #
+*.project
+.settings/
+
+
+# generated folders
+bin/
+build/
+.gradle/
+.mvn/
+.git/
