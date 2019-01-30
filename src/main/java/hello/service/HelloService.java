@@ -3,6 +3,7 @@ package hello.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.slf4j.Logger;
@@ -13,6 +14,8 @@ import org.springframework.cloud.sleuth.Tracer;
 import org.springframework.stereotype.Component;
 
 import hello.model.Customer;
+import hello.service.dao.jpa.entity.CustomerJPA;
+import hello.service.dao.jpa.repository.ICustomerRepository;
 
 @Component
 @Named("HelloService")
@@ -21,6 +24,9 @@ public class HelloService {
     protected final Logger log = LoggerFactory.getLogger(this.getClass());
 
     private Customer customer;
+
+    @Inject()
+    private ICustomerRepository customerRepository;
 
     private List<String> items = new ArrayList<String>();
 
@@ -50,12 +56,24 @@ public class HelloService {
         return customer;
     }
 
+    public Customer getCustomerByEmail(String email) {
+        log.info("Customer request by email {}", email);
+        CustomerJPA customerJpa = customerRepository.findByEmail(email);
+        customerJpa.toCustomer();
+        return new Customer();
+    }
+
+    public Customer getCustomerByLastName(String email) {
+        return customer;
+    }
+
     public List<String> getItems() {
         return items;
     }
 
     public void setCustomer(Customer customer) {
-        this.customer = customer;
+        CustomerJPA customerJPA = Customer.toCustomerJPA(customer);
+        customerRepository.save(customerJPA);
     }
 
     public void setItems(List<String> items) {

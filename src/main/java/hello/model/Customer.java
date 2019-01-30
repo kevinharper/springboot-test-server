@@ -1,14 +1,19 @@
 package hello.model;
 
+import hello.service.dao.jpa.entity.CustomerJPA;
+
 public class Customer {
-    private int customerId;
+
     private String email;
     private String firstName;
     private String lastName;
-    private Address address;
 
-    public int getCustomerId() {
-        return customerId;
+    public static CustomerJPA toCustomerJPA(Customer customer) {
+        CustomerJPA customerJPA = new CustomerJPA();
+        customerJPA.setEmail(customer.getEmail());
+        customerJPA.setFirstName(customer.getFirstName());
+        customerJPA.setLastName(customer.getLastName());
+        return customerJPA;
     }
 
     /**
@@ -32,10 +37,6 @@ public class Customer {
         return lastName;
     }
 
-    public void setCustomerId(int customerId) {
-        this.customerId = customerId;
-    }
-
     /**
      * @param email the email to set
      */
@@ -56,12 +57,4 @@ public class Customer {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-
-	public Address getAddress() {
-		return address;
-	}
-
-	public void setAddress(Address address) {
-		this.address = address;
-	}
 }
