@@ -19,13 +19,12 @@ import hello.service.dao.jpa.repository.ICustomerRepository;
 
 @Component
 @Named("HelloService")
-public class HelloService {
+public class JPAService {
 
     protected final Logger log = LoggerFactory.getLogger(this.getClass());
 
-    private Customer customer;
 
-    @Inject()
+    @Inject
     private ICustomerRepository customerRepository;
 
     private List<String> items = new ArrayList<String>();
@@ -52,28 +51,31 @@ public class HelloService {
         log.info("Back in the original span");
     }
 
-    public Customer getCustomer() {
-        return customer;
+    public Customer getCustomer(long id) {
+        CustomerJPA customerjpa = customerRepository.findOne(id);
+        if(customerjpa == null) {
+        	return null;
+        }
+    	return customerjpa.toCustomer();
     }
 
     public Customer getCustomerByEmail(String email) {
         log.info("Customer request by email {}", email);
-        CustomerJPA customerJpa = customerRepository.findByEmail(email);
-        customerJpa.toCustomer();
-        return new Customer();
+        return customerRepository.findByEmail(email).toCustomer();
     }
 
-    public Customer getCustomerByLastName(String email) {
-        return customer;
+    public Customer getCustomerByLastName(String lastName) {
+        return customerRepository.findByLastName(lastName).toCustomer();
     }
 
     public List<String> getItems() {
         return items;
     }
 
-    public void setCustomer(Customer customer) {
+    public long saveCustomer(Customer customer) {
         CustomerJPA customerJPA = Customer.toCustomerJPA(customer);
         customerRepository.save(customerJPA);
+        return customerJPA.getId();
     }
 
     public void setItems(List<String> items) {
