@@ -14,21 +14,29 @@ public class CustomerJPA {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long customerId;
+    private long id;
+    
     private String email;
     private String firstName;
     private String lastName;
 
-    /**
+    public long getId() {
+		return id;
+	}
+
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+
+	/**
      * @return the addressId
      */
     public long getAddressId() {
         return addressId;
     }
 
-    public long getCustomerId() {
-        return customerId;
-    }
 
     /**
      * @return the email
@@ -58,9 +66,7 @@ public class CustomerJPA {
         this.addressId = addressId;
     }
 
-    public void setCustomerId(long customerId) {
-        this.customerId = customerId;
-    }
+
 
     /**
      * @param email the email to set
@@ -87,6 +93,7 @@ public class CustomerJPA {
         Customer customer = new Customer();
         customer.setEmail(email);
         customer.setLastName(lastName);
+        customer.setFirstName(firstName);
         return customer;
     }
 }
