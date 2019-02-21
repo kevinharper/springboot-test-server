@@ -12,14 +12,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import hello.model.Customer;
-import hello.service.JPAService;
+import hello.service.CustomerService;
 
 @RestController
 public class JPAController {
 
     protected final Logger log = LoggerFactory.getLogger(this.getClass());
     @Autowired
-    private JPAService helloService;
+    private CustomerService helloService;
 
     @RequestMapping(value = "/customers", method = RequestMethod.GET)
     public ResponseEntity<Customer> getCustomer(@RequestParam(value = "email", required = false) String email, @RequestParam(value = "lastName", required = false) String lastName) {

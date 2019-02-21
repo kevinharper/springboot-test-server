@@ -19,13 +19,16 @@ import hello.service.dao.jpa.repository.ICustomerRepository;
 
 @Component
 @Named("HelloService")
-public class JPAService {
+public class CustomerService {
 
     protected final Logger log = LoggerFactory.getLogger(this.getClass());
 
 
     @Inject
     private ICustomerRepository customerRepository;
+    
+    @Inject
+    private CustomerPublishService customerPublishService;
 
     private List<String> items = new ArrayList<String>();
 
@@ -75,6 +78,9 @@ public class JPAService {
     public long saveCustomer(Customer customer) {
         CustomerJPA customerJPA = Customer.toCustomerJPA(customer);
         customerRepository.save(customerJPA);
+        // send customer to partner via SQS
+        customerPublishService.sendCustomerToSQS();
+        
         return customerJPA.getId();
     }
 

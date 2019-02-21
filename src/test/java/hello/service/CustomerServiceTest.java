@@ -17,11 +17,11 @@ import hello.Application;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = Application.class)
-public class JPAServiceTest {
+public class CustomerServiceTest {
 
     @Inject
-    @Named("JPAService")
-    private JPAService helloService;
+    @Named("CustomerService")
+    private CustomerService helloService;
 
     @Test
     public void testAddItem() {

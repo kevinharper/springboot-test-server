@@ -1,0 +1,5 @@
+aws:
+  sqs:
+    customerqueue: "paste-sqs-queue-url-here"
+  accesskey: "paste-access-key-id-here"
+  secretkey: "paste-secret-access-key-here"
