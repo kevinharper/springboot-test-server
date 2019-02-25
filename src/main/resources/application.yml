@@ -3,3 +3,20 @@ aws:
     customerqueue: "paste-sqs-queue-url-here"
   accesskey: "paste-access-key-id-here"
   secretkey: "paste-secret-access-key-here"
+spring:  datasource:    url: jdbc:postgresql://localhost:5432/springbootdb
+    username: postgres
+    password: "paste-postgres-password-here"
+  jpa:    hibernate:      ddl-auto: create-drop
+    show-sql: true
+  mail:
+    host: "email-smtp.us-east-1.amazonaws.com"
+    port: 587
+    username: ""
+    password: ""
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
